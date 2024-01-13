@@ -6,19 +6,38 @@
 parameters:
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: true
+        autoconfigure: true
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/'
+    Domain\:
+        resource: '../src/Domain/'
         exclude:
-            - '../src/DependencyInjection/'
-            - '../src/Entity/'
-            - '../src/Kernel.php'
+            - '../src/Domain/*/Entity/'
+            - '../src/Domain/*/Event/'
+            - '../src/Domain/*/ValueObject/'
+            - '../src/Domain/*/*/*/*Response.php'
+            - '../src/Domain/*/*/*/*Request.php'
+            - '../src/Domain/Shared/Error/Error.php'
+            - '../src/Domain/Shared/Error/ErrorList.php'
+            - '../src/Domain/Shared/Error/ErrorResponse.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    Extension\:
+        resource: '../src/Extension/'
+        exclude:
+            - '../src/Extension/Assert/'
+
+    Infrastructure\:
+        resource: '../src/Infrastructure/'
+        exclude:
+            - '../src/Infrastructure/Symfony/Kernel.php'
+            - '../src/Infrastructure/Persistence/Doctrine/Entity/'
+            - '../src/Infrastructure/Persistence/Doctrine/Mapper/'
+            - '../src/Infrastructure/Persistence/Doctrine/Mapping/'
+            - '../src/Infrastructure/Persistence/Doctrine/Migrations/'
+            - '../src/Infrastructure/Persistence/Doctrine/Type/'
+            - '../src/Infrastructure/Security/Symfony/User/User.php'
+            - '../src/Infrastructure/Symfony/Exception/'
+
+    Presentation\:
+        resource: '../src/Presentation/'
