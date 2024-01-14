@@ -8,9 +8,9 @@ final readonly class Address implements \Stringable
 {
     public function __construct(
         public string $address,
-        public ?string $zipCode,
         public string $city,
-        public string $country
+        public string $country,
+        public ?string $zipCode = null,
     ) {
     }
 

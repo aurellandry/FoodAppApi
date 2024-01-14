@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Infrastructure\Persistence\Doctrine\Entity\Establishment" table="establishments"
+            repository-class="Infrastructure\Persistence\Doctrine\Repository\EstablishmentRepository"
+    >
+        <id name="id" type="uuid"/>
+        <field name="name" column="name" type="string" length="255" nullable="true" />
+        <field name="address" column="address" type="string" length="255" nullable="false" />
+        <field name="zipCode" column="zipcode" type="string" length="30" nullable="true" />
+        <field name="city" column="city" type="string" length="255" nullable="false" />
+        <field name="country" column="country" type="string" length="255" nullable="false" />
+        <field name="phone" column="phone" type="phone" nullable="false" />
+        <field name="establishmentType" column="type" type="string" length="60" nullable="false" />
+        <field name="siret" column="siret" type="string" length="30" nullable="true" />
+    </entity>
+
+</doctrine-mapping>

@@ -18,7 +18,9 @@ final readonly class UserRegisterJsonPresenter implements UserRegisterPresenterI
     public function present(UserRegisterResponse $response): void
     {
         $this->viewModel = new UserRegisterJsonViewModel();
-        $this->viewModel->user = $response->user;
+        $this->viewModel->user = new UserRegisterViewModel(
+            (string) $response->user->getIdentifier()
+        );
     }
 
     public function displayViewModel(): UserRegisterJsonViewModel|ErrorJsonViewModel

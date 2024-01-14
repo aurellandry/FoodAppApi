@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Domain\Establishment\UseCase\Create;
 
-use Domain\Establishment\Entity\Establishment;
 use Domain\Establishment\Factory\EstablishmentFactoryInterface;
 use Domain\Establishment\Service\EstablishmentCreationRequestValidatorInterface;
 use Domain\Establishment\Service\EstablishmentPersistenceCommand;

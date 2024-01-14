@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Persistence\Doctrine\Mapper;
 
-use Domain\Shared\ValueObject\Email;
 use Domain\Shared\ValueObject\UserIdentifier;
-use Domain\Shared\ValueObject\Uuid;
 use Domain\User\ValueObject\Role;
 use Extension\Assert\Assertion;
 use Infrastructure\Persistence\Doctrine\Entity\User as UserEntity;

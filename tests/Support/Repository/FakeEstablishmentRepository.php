@@ -7,6 +7,7 @@ namespace Tests\Support\Repository;
 use Domain\Establishment\Entity\Establishment;
 use Domain\Establishment\Service\EstablishmentPersistenceCommand;
 use Domain\Establishment\Service\EstablishmentPersistenceQuery;
+use Domain\Shared\ValueObject\EstablishmentIdentifier;
 use Tests\Support\Factory\FakeEstablishmentFactory;
 
 final class FakeEstablishmentRepository implements EstablishmentPersistenceCommand, EstablishmentPersistenceQuery
@@ -17,15 +18,15 @@ final class FakeEstablishmentRepository implements EstablishmentPersistenceComma
     {
         $this->establishments = [
             FakeEstablishmentFactory::create(
-                'e012d897-fb12-4780-9177-93c6f9fec8a5',
-                'RESTAURANT',
-                'My Test Restaurant',
-                '+33601020304',
-                '23 rue Cherki',
-                '75002',
-                'Paris',
-                'France',
-                '55327987900324'
+                id: 'e012d897-fb12-4780-9177-93c6f9fec8a5',
+                type: 'RESTAURANT',
+                name: 'My Test Restaurant',
+                siret: '55327987900324',
+                phone: '+33601020304',
+                address: '23 rue Cherki',
+                zipcode: '75002',
+                city: 'Paris',
+                country: 'France',
             )
         ];
     }
@@ -35,12 +36,12 @@ final class FakeEstablishmentRepository implements EstablishmentPersistenceComma
         $this->establishments[] = $establishment;
     }
 
-    public function findById(string $id): ?Establishment
+    public function findById(EstablishmentIdentifier $id): ?Establishment
     {
         $establishments = array_filter(
             $this->establishments,
             function (Establishment $establishment) use ($id) {
-                return $establishment->getId() === $id;
+                return $establishment->getId() === (string) $id;
             }
         );
 

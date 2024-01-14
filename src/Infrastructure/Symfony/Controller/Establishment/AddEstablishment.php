@@ -11,6 +11,7 @@ use Infrastructure\Symfony\ValueResolver\Establishment\EstablishmentCreationRequ
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\HttpKernel\Attribute\ValueResolver;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[AsController]
 #[Route(
@@ -18,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
     name: 'api_establishments_create',
     methods: ['POST']
 )]
+#[IsGranted('ROLE_ADMIN')]
 final readonly class AddEstablishment
 {
     public function __construct(

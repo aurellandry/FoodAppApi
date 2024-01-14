@@ -16,13 +16,13 @@ abstract class Establishment
         private string $name,
         private Address $address,
         private Phone $phone,
-        private ?string $siret = null
+        private string $siret
     ) {
     }
 
-    public function getId(): string
+    public function getId(): EstablishmentIdentifier
     {
-        return (string) $this->uuid;
+        return $this->uuid;
     }
 
     public function getName(): string
@@ -35,9 +35,9 @@ abstract class Establishment
         $this->name = $name;
     }
 
-    public function getAddress(): string
+    public function getAddress(): Address
     {
-        return (string) $this->address;
+        return $this->address;
     }
 
     public function setAddress(Address $address): void
@@ -45,9 +45,9 @@ abstract class Establishment
         $this->address = $address;
     }
 
-    public function getPhone(): string
+    public function getPhone(): Phone
     {
-        return (string) $this->phone;
+        return $this->phone;
     }
 
     public function setPhone(Phone $phone): void
@@ -55,12 +55,12 @@ abstract class Establishment
         $this->phone = $phone;
     }
 
-    public function getSiret(): ?string
+    public function getSiret(): string
     {
         return $this->siret;
     }
 
-    public function setSiret(?string $siret): void
+    public function setSiret(string $siret): void
     {
         $this->siret = $siret;
     }

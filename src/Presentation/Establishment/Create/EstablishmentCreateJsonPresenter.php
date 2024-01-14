@@ -18,7 +18,9 @@ final readonly class EstablishmentCreateJsonPresenter implements EstablishmentCr
     public function present(EstablishmentCreationResponse $response): void
     {
         $this->response = new EstablishmentCreateJsonViewModel();
-        $this->response->establishment = $response->establishment;
+        $this->response->establishment = new EstablishmentCreateViewModel(
+            (string) $response->establishment->getId()
+        );
     }
 
     public function presentError(ErrorResponse $response): void

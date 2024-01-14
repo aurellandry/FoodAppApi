@@ -6,6 +6,7 @@ namespace Domain\Establishment\UseCase\Create;
 
 use Domain\Establishment\Service\EstablishmentCreationRequestValidatorInterface;
 use Domain\Establishment\Service\EstablishmentPersistenceQuery;
+use Domain\Establishment\ValueObject\EstablishmentType;
 use Domain\Shared\Error\ErrorList;
 use Extension\Assert\Assert;
 use Extension\Assert\LazyAssertionException;
@@ -24,11 +25,13 @@ final readonly class EstablishmentCreationRequestValidator implements Establishm
     {
         try {
             $isAddressComplete = self::isAddressComplete($request);
+            $isTypeSupported = self::isEstablishmentTypeSupported($request->type);
 
             Assert::lazy()
                 ->that($request->name, 'name')->notEmpty('Establishment name is required')
                 ->that($request->siret, 'siret')->notEmpty('SIRET number is required')
                 ->that($isAddressComplete, 'address')->true('Address must be complete')
+                ->that($isTypeSupported, 'type')->true('Unknown establishment type')
                 ->verifyNow();
 
             $establishmentExists = (bool) $this->repository->findBySiret($request->siret);
@@ -59,5 +62,16 @@ final readonly class EstablishmentCreationRequestValidator implements Establishm
         return !empty($request->address)
             && !empty($request->city)
             && !empty($request->country);
+    }
+
+    private static function isEstablishmentTypeSupported(string $establishmentType): bool
+    {
+        try {
+            EstablishmentType::from($establishmentType);
+
+            return true;
+        } catch (\Throwable) {
+            return false;
+        }
     }
 }

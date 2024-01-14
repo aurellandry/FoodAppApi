@@ -29,6 +29,8 @@ final readonly class UserRegisterRequestValidator implements UserRegisterRequest
                 ->notBlank('Please provide a last name')
                 ->that($request->password, 'password')
                 ->notBlank('Please provide a password')
+                ->that($request->email, 'email')
+                ->email('Invalid email')
                 ->verifyNow();
 
             $emailExists = (bool) $this->repository->findByEmail(

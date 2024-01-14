@@ -33,10 +33,10 @@ final readonly class RestaurantFactory  implements ConcreteEstablishmentFactoryI
             ),
             $request->name,
             new Address(
-                $request->address,
-                $request->zipcode,
-                $request->city,
-                $request->country
+                address: $request->address,
+                zipCode: $request->zipcode,
+                city: $request->city,
+                country: $request->country
             ),
             Phone::fromString($request->phone),
             $request->siret

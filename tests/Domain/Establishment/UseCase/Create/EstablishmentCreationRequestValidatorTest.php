@@ -34,28 +34,42 @@ final class EstablishmentCreationRequestValidatorTest extends TestCase
     {
         yield 'A valid establishment creation request' => [
             new EstablishmentCreationRequest(
-                'RESTAURANT',
-                'Test Establishment',
-                '+33601020304',
-                '94 rue Beauvau',
-                '75012',
-                'Paris',
-                'France',
-                '55327987900672'
+                type: 'RESTAURANT',
+                name: 'Test Establishment',
+                siret: '55327987900672',
+                phone: '+33601020304',
+                address: '94 rue Beauvau',
+                zipcode: '75012',
+                city: 'Paris',
+                country: 'France',
             ),
             true
         ];
 
-        yield 'An invalid establishment creation request' => [
+        yield 'An invalid establishment creation request - unknown type' => [
             new EstablishmentCreationRequest(
-                'UNKNOWN',
-                'Test Establishment',
-                '+33601020304',
-                '94 rue Beauvau',
-                '75012',
-                null,
-                'France',
-                '55327987900672'
+                type: 'UNKNOWN',
+                name: 'Test Establishment',
+                phone: '+33601020304',
+                address: '94 rue Beauvau',
+                zipcode: '75012',
+                city: 'Paris',
+                country: 'France',
+                siret: '55327987900672'
+            ),
+            false
+        ];
+
+        yield 'An invalid establishment creation request - Incomplete address' => [
+            new EstablishmentCreationRequest(
+                type: 'RESTAURANT',
+                name: 'Test Establishment',
+                phone: '+33601020304',
+                address: '94 rue Beauvau',
+                zipcode: '75012',
+                city: '',
+                country: 'France',
+                siret: '55327987900672'
             ),
             false
         ];

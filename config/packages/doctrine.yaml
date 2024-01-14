@@ -4,6 +4,7 @@ doctrine:
         types:
             uuid: Infrastructure\Persistence\Doctrine\Type\UuidType
             email: Infrastructure\Persistence\Doctrine\Type\EmailType
+            phone: Infrastructure\Persistence\Doctrine\Type\PhoneType
         mapping_types:
             uuid: uuid
 

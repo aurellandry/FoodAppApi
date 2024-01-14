@@ -23,7 +23,8 @@ final readonly class User implements UserInterface, PasswordAuthenticatedUserInt
     public function getRoles(): array
     {
         return match ($this->role) {
-            Role::User => ['ROLE_USER'],
+            Role::Admin => ['ROLE_ADMIN', 'ROLE_USER'],
+            Role::User => ['ROLE_USER']
         };
     }
 

@@ -33,14 +33,14 @@ class EstablishmentCreationTest extends TestCase implements EstablishmentCreatio
             (new FakeEstablishmentCreationRequestValidator())->shouldBeValid()
         );
         $request = new EstablishmentCreationRequest(
-            'RESTAURANT',
-            'My Test Establishment',
-            '+33601020304',
-            '94 rue Beauvau',
-            '75012',
-            'Paris',
-            'France',
-            '55327987900672'
+            type: 'RESTAURANT',
+            name: 'My Test Establishment',
+            siret: '55327987900672',
+            phone: '+33601020304',
+            address: '94 rue Beauvau',
+            zipcode: '75012',
+            city: 'Paris',
+            country: 'France',
         );
 
         // When
@@ -54,7 +54,12 @@ class EstablishmentCreationTest extends TestCase implements EstablishmentCreatio
                     'c6da0062-0e8f-4e99-bcbc-22b1431535c9'
                 ),
                 'My Test Establishment',
-                new Address('94 rue Beauvau', '75012', 'Paris', 'France'),
+                new Address(
+                    address: '94 rue Beauvau',
+                    zipCode: '75012',
+                    city: 'Paris',
+                    country: 'France'
+                ),
                 Phone::fromString('+33601020304'),
                 '55327987900672'
             ),
@@ -72,14 +77,14 @@ class EstablishmentCreationTest extends TestCase implements EstablishmentCreatio
             (new FakeEstablishmentCreationRequestValidator())->shouldBeValid()
         );
         $request = new EstablishmentCreationRequest(
-            'UNKNOWN',
-            'My Test Establishment',
-            '+33601020304',
-            '94 rue Beauvau',
-            '75012',
-            'Paris',
-            'France',
-            '553 279 879 00672'
+            type: 'UNKNOWN',
+            name: 'My Test Establishment',
+            phone: '+33601020304',
+            address: '94 rue Beauvau',
+            zipcode: '75012',
+            city: 'Paris',
+            country: 'France',
+            siret: '553 279 879 00672'
         );
 
         $sut->execute($request, $this);
@@ -94,14 +99,14 @@ class EstablishmentCreationTest extends TestCase implements EstablishmentCreatio
             (new FakeEstablishmentCreationRequestValidator())->shouldBeInvalid()
         );
         $request = new EstablishmentCreationRequest(
-            'RESTAURANT',
-            'My Test Establishment',
-            '+33601020304',
-            '94 rue Beauvau',
-            '75012',
-            'Paris',
-            'France',
-            '55327987900672'
+            type: 'RESTAURANT',
+            name: 'My Test Establishment',
+            phone: '+33601020304',
+            address: '94 rue Beauvau',
+            zipcode: '75012',
+            city: 'Paris',
+            country: 'France',
+            siret: '55327987900672'
         );
 
         // When
